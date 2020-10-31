@@ -1,3 +1,4 @@
 Word/Слово
 Good/Хорошо
 Implement/Реализовывать
+Dictionary/Словарь

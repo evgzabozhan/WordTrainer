@@ -1,7 +1,12 @@
 package dictionary;
 
+import word.Word;
+
+import java.io.IOException;
+import java.util.List;
+
 public interface DictionaryMethod {
-    public boolean loadDictionary(String path);
-    public boolean writeWordToDictionary(String path);
-    public boolean deleteWordFromDictionary(String path);
+     List<Word> loadDictionary(String path) throws IOException;
+     boolean writeWordToDictionary(String path,Word word);
+     boolean removeWordFromDictionary(String path, Word word) throws IOException;
 }

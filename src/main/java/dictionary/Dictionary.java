@@ -1,25 +1,37 @@
 package dictionary;
 
+import text.TextFile;
 import word.Word;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Dictionary implements DictionaryMethod {
-    List<Word> Dictionary = new ArrayList<Word>();
+    TextFile file = new TextFile();
 
-    public boolean loadDictionary(String path) {
-        File dictionary = new File(path);
-
-        return false;
+    public List<Word> loadDictionary(String filePath) throws IOException {
+        List<Word> dictionary = new ArrayList<Word>();
+            String[] words = file.read(filePath).split("\n");
+            for (String word : words) {
+                String[] values = word.split("/");
+                dictionary.add(new Word(values[0], values[1]));
+            }
+            return dictionary;
     }
 
-    public boolean writeWordToDictionary(String path) {
-        return false;
+    public boolean writeWordToDictionary(String path,Word word) {
+        String wordString = word.getLanguage1() + "/" + word.getLanguage2();
+        return file.add(path,wordString);
     }
 
-    public boolean deleteWordFromDictionary(String path) {
-        return false;
+    public boolean removeWordFromDictionary(String path, Word word) throws IOException {
+        String value = "";
+        if (word.getLanguage1() != null) {
+            value = word.getLanguage1();
+        } else if (word.getLanguage2() != null) {
+            value = word.getLanguage2();
+        }
+        return file.remove(path, value);
     }
 }

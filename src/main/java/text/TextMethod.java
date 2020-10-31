@@ -5,12 +5,12 @@ import java.util.List;
 
 public interface TextMethod {
 
-    public String read(String filePath) throws IOException;
+    String read(String filePath) throws IOException;
 
-    public boolean remove(String filePath,String word) throws IOException;
+    boolean remove(String filePath,String word) throws IOException;
 
-    public boolean add(String filePath,String word) throws IOException;
+    boolean add(String filePath,String word) throws IOException;
 
-    public boolean write(String filePath, List<String> dictionary);
+    boolean write(String filePath, List<String> dictionary);
 
 }

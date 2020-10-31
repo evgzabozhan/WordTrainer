@@ -1,5 +1,7 @@
 package word;
 
+import java.util.Objects;
+
 public class Word {
 
     private String language1;
@@ -24,5 +26,19 @@ public class Word {
 
     public void setLanguage2(String language2) {
         this.language2 = language2;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Word word = (Word) o;
+        return language1.equals(word.language1) &&
+                language2.equals(word.language2);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(language1, language2);
     }
 }
