@@ -50,4 +50,9 @@ public class TextFile implements TextMethod {
             return false;
         }
     }
+
+    @Override
+    public boolean check(String filePath, String word) {
+        return false;
+    }
 }

@@ -20,7 +20,7 @@ public class DictionaryTest {
         testList.add(new Word("Cat", "Кошка"));
         testList.add(new Word("Home", "Дом"));
 
-        List<Word> dictionaryList = dictionary.loadDictionary(filePath);
+        List<Word> dictionaryList = dictionary.loadDictionary();
 
         assertFalse(dictionaryList.isEmpty());
         assertEquals(dictionaryList, testList);
@@ -28,13 +28,13 @@ public class DictionaryTest {
 
     @Test
     public void writeWordToDictionaryTest(){
-        assertTrue(dictionary.writeWordToDictionary(filePath,new Word("Time","Время")));
+        assertTrue(dictionary.writeWordToDictionary(new Word("Time","Время")));
     }
 
     @Test
     public void removeWordFromDictionaryTest() throws IOException {
         //need fix bug with remove last word.
-        assertTrue(dictionary.removeWordFromDictionary(filePath,new Word("Time","Время")));
+        assertTrue(dictionary.removeWordFromDictionary(new Word("Time","Время")));
     }
 
 }

@@ -31,4 +31,9 @@ public class TextFileTest {
         file.write(filePath,dictionary);
     }
 
+    @Test
+    public void checkTest(){
+        Assert.assertTrue(file.check(filePath,"Привет"));
+    }
+
 }

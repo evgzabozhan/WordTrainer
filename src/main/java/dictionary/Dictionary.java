@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dictionary implements DictionaryMethod {
+    static String path = "src/main/resources/TestDictionary.txt";
     TextFile file = new TextFile();
 
-    public List<Word> loadDictionary(String filePath) throws IOException {
+    public List<Word> loadDictionary() throws IOException {
         List<Word> dictionary = new ArrayList<Word>();
-            String[] words = file.read(filePath).split("\n");
+            String[] words = file.read(path).split("\n");
             for (String word : words) {
                 String[] values = word.split("/");
                 dictionary.add(new Word(values[0], values[1]));
@@ -20,12 +21,12 @@ public class Dictionary implements DictionaryMethod {
             return dictionary;
     }
 
-    public boolean writeWordToDictionary(String path,Word word) {
+    public boolean writeWordToDictionary(Word word) {
         String wordString = word.getLanguage1() + "/" + word.getLanguage2();
         return file.add(path,wordString);
     }
 
-    public boolean removeWordFromDictionary(String path, Word word) throws IOException {
+    public boolean removeWordFromDictionary( Word word) throws IOException {
         String value = "";
         if (word.getLanguage1() != null) {
             value = word.getLanguage1();
@@ -33,5 +34,10 @@ public class Dictionary implements DictionaryMethod {
             value = word.getLanguage2();
         }
         return file.remove(path, value);
+    }
+
+    @Override
+    public boolean checkWordFromDictionary(Word word) {
+        return false;
     }
 }

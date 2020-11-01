@@ -1,5 +1,7 @@
+import dictionary.Dictionary;
 import text.TextFile;
 import userinterface.UserInterface;
+import word.Word;
 
 import java.io.IOException;
 
