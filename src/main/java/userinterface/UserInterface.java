@@ -18,7 +18,7 @@ public class UserInterface implements ActionListener{
         JFrame frame = createFrame();
         frame.getContentPane().add(BorderLayout.NORTH,createMenuBar());
         frame.getContentPane().add(BorderLayout.CENTER,getAddPanel());
-      //  frame.getContentPane().add(BorderLayout.CENTER,createTranslatePanel());
+      //  frame.getContentPane().add(BorderLayout.CENTER,getTranslatePanel());
       // frame.getContentPane().add(BorderLayout.CENTER,getDeletePanel());
         frame.setVisible(true);
     }
@@ -128,11 +128,19 @@ public class UserInterface implements ActionListener{
 
         constraints.gridx = 0;
         constraints.gridy = 2;
-        JButton check = new JButton("Check");
+        final JButton check = new JButton("Check");
         check.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dictionary.checkWordFromDictionary(new Word(wordText.getText(),textFieldForLanguage2.getText()));
+                try {
+                   if(dictionary.checkWordFromDictionary(new Word(wordText.getText(),textFieldForLanguage2.getText()))){
+                       check.setText("You are right!");
+                   } else {
+                       check.setText("It's wrong!");
+                   }
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
                 //place for result
             }
         });

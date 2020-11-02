@@ -8,7 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dictionary implements DictionaryMethod {
-    static String path = "src/main/resources/TestDictionary.txt";
+    private static String path = "src/main/resources/Dictionary.txt";
+
+    public static void setPath(String path) {
+        Dictionary.path = path;
+    }
+
     TextFile file = new TextFile();
 
     public List<Word> loadDictionary() throws IOException {
@@ -37,7 +42,14 @@ public class Dictionary implements DictionaryMethod {
     }
 
     @Override
-    public boolean checkWordFromDictionary(Word word) {
+    public boolean checkWordFromDictionary(Word word) throws IOException {
+        List<Word> dictionary = loadDictionary();
+        for(Word wordFromDictionary : dictionary){
+            if (wordFromDictionary.getLanguage1().equals(word.getLanguage1())
+                    && wordFromDictionary.getLanguage2().equals(word.getLanguage2())){
+                return true;
+            }
+        }
         return false;
     }
 }

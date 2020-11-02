@@ -1,4 +1,5 @@
 import dictionary.Dictionary;
+import org.junit.Assert;
 import org.junit.Test;
 import word.Word;
 
@@ -9,11 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DictionaryTest {
-    String filePath = "src/main/resources/TestDictionary.txt";
     Dictionary dictionary = new Dictionary();
+
 
     @Test
     public void loadDictionaryTest() throws IOException {
+        Dictionary.setPath("src/main/resources/TestDictionary.txt");
 
         List<Word> testList = new ArrayList<>();
         testList.add(new Word("Dog", "Собака"));
@@ -28,13 +30,24 @@ public class DictionaryTest {
 
     @Test
     public void writeWordToDictionaryTest(){
+        Dictionary.setPath("src/main/resources/TestDictionary.txt");
         assertTrue(dictionary.writeWordToDictionary(new Word("Time","Время")));
     }
 
     @Test
     public void removeWordFromDictionaryTest() throws IOException {
+        Dictionary.setPath("src/main/resources/TestDictionary.txt");
+
         //need fix bug with remove last word.
+
         assertTrue(dictionary.removeWordFromDictionary(new Word("Time","Время")));
+    }
+
+    @Test
+    public void checkWordFromDictionaryTest() throws IOException {
+        Dictionary.setPath("src/main/resources/TestDictionary.txt");
+
+        Assert.assertTrue(dictionary.checkWordFromDictionary(new Word("Cat","Кошка")));
     }
 
 }

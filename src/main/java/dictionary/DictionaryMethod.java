@@ -9,5 +9,5 @@ public interface DictionaryMethod {
      List<Word> loadDictionary() throws IOException;
      boolean writeWordToDictionary(Word word);
      boolean removeWordFromDictionary( Word word) throws IOException;
-     boolean checkWordFromDictionary(Word word);
+     boolean checkWordFromDictionary(Word word) throws IOException;
 }
