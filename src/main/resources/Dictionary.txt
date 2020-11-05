@@ -4,4 +4,5 @@ Implement/Реализовывать
 Dictionary/Словарь
 Java/Кофе
 Second/Второй
-Hello/Привет
+Bird/Птица
+Angle/Угол

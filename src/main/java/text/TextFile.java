@@ -30,9 +30,9 @@ public class TextFile implements TextMethod {
         String[] words = read(filePath).split("\n");
         List<String> dictionary = new ArrayList<>();
         try {
-            for (int i = 0; i < words.length - 1; i++) {
-                if (!words[i].toLowerCase().contains(word.toLowerCase()))
-                    dictionary.add(words[i] + "\n");
+            for (String s : words) {
+                if (!s.toLowerCase().contains(word.toLowerCase()))
+                    dictionary.add(s + "\n");
             }
             return write(filePath, dictionary);
         } catch (Exception e){

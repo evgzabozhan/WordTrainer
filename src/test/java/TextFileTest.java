@@ -19,7 +19,7 @@ public class TextFileTest {
 
     @Test
     public void removeTest() throws IOException {
-        Assert.assertTrue(file.remove(filePath,"Собака"));
+        Assert.assertTrue(file.remove(filePath,"Привет"));
     }
 
     @Test

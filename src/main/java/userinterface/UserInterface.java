@@ -16,7 +16,7 @@ public class UserInterface implements ActionListener{
 
     public void createUserInterface(){
         JFrame frame = createFrame();
-        frame.getContentPane().add(BorderLayout.NORTH,createMenuBar());
+        frame.getContentPane().add(BorderLayout.NORTH,createMenuBar(frame));
         frame.getContentPane().add(BorderLayout.CENTER,getAddPanel());
       //  frame.getContentPane().add(BorderLayout.CENTER,getTranslatePanel());
       // frame.getContentPane().add(BorderLayout.CENTER,getDeletePanel());
@@ -35,13 +35,35 @@ public class UserInterface implements ActionListener{
         return frame;
     }
 
-    private JMenuBar createMenuBar(){
+    private JMenuBar createMenuBar(final JFrame frame){
         JMenuBar menuBar = new JMenuBar();
 
         JMenu word = new JMenu("Word");
-        word.add(new JMenuItem("Add new word"));
-        word.add(new JMenuItem("Delete word"));
-        word.add(new JMenuItem("Change word"));
+        JMenuItem add = new JMenuItem("Add new word");
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               frame.getContentPane().add(BorderLayout.CENTER, getAddPanel());
+            }
+        });
+        JMenuItem delete = new JMenuItem("Delete word");
+        delete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().add(BorderLayout.CENTER, getDeletePanel());
+            }
+        });
+
+        JMenuItem change = new JMenuItem("Change word");
+        change.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        word.add(add);
+        word.add(delete);
+        word.add(change);
 
         JMenu help = new JMenu("Help");
         help.add(new JMenuItem("About"));
@@ -82,12 +104,13 @@ public class UserInterface implements ActionListener{
 
         constraints.gridx = 0;
         constraints.gridy = 2;
-        JButton addNewWord = new JButton("Add");
+        final JButton addNewWord = new JButton("Add");
         addNewWord.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                     dictionary.writeWordToDictionary(new Word(textFieldForLanguage1.getText(),
                             textFieldForLanguage2.getText()));
+                    addNewWord.setText("Word added!");
             }
         });
         panel.add(addNewWord,constraints);
@@ -173,12 +196,13 @@ public class UserInterface implements ActionListener{
 
         constraints.gridx = 0;
         constraints.gridy = 1;
-        JButton delete = new JButton("Delete");
+        final JButton delete = new JButton("Delete");
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     dictionary.removeWordFromDictionary(new Word(textFieldForRemove.getText(),null));
+                    delete.setText("Word deleted!");
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }

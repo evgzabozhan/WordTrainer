@@ -37,9 +37,6 @@ public class DictionaryTest {
     @Test
     public void removeWordFromDictionaryTest() throws IOException {
         Dictionary.setPath("src/main/resources/TestDictionary.txt");
-
-        //need fix bug with remove last word.
-
         assertTrue(dictionary.removeWordFromDictionary(new Word("Time","Время")));
     }
 
