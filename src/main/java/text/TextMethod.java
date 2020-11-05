@@ -13,6 +13,4 @@ public interface TextMethod {
 
     boolean write(String filePath, List<String> dictionary);
 
-    boolean check(String filePath, String word);
-
 }

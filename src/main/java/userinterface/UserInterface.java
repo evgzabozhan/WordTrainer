@@ -17,7 +17,7 @@ public class UserInterface implements ActionListener{
     public void createUserInterface(){
         JFrame frame = createFrame();
         frame.getContentPane().add(BorderLayout.NORTH,createMenuBar(frame));
-        frame.getContentPane().add(BorderLayout.CENTER,getAddPanel());
+        //frame.getContentPane().add(BorderLayout.CENTER,getAddPanel());
       //  frame.getContentPane().add(BorderLayout.CENTER,getTranslatePanel());
       // frame.getContentPane().add(BorderLayout.CENTER,getDeletePanel());
         frame.setVisible(true);
@@ -44,6 +44,7 @@ public class UserInterface implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                frame.getContentPane().add(BorderLayout.CENTER, getAddPanel());
+               frame.setVisible(true);
             }
         });
         JMenuItem delete = new JMenuItem("Delete word");
@@ -51,6 +52,7 @@ public class UserInterface implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.getContentPane().add(BorderLayout.CENTER, getDeletePanel());
+                frame.setVisible(true);
             }
         });
 
