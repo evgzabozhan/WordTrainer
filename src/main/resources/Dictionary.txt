@@ -1,7 +1,7 @@
 Word/Слово
 Good/Хорошо
 Implement/Реализовывать
-Dictionary/Словарь
+Diсtionary/Словарь
 Java/Кофе
 Second/Второй
 Bird/Птица

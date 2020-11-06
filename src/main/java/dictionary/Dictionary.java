@@ -52,4 +52,10 @@ public class Dictionary implements DictionaryMethod {
         }
         return false;
     }
+
+    @Override
+    public boolean changeWordAtDictionary(Word word) throws IOException {
+        String wordString = word.getLanguage1() + "/" + word.getLanguage2();
+        return file.change(path, wordString);
+    }
 }

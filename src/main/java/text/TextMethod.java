@@ -13,4 +13,6 @@ public interface TextMethod {
 
     boolean write(String filePath, List<String> dictionary);
 
+    boolean change(String filePath, String word) throws IOException;
+
 }

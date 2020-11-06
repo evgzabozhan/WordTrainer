@@ -32,8 +32,8 @@ public class TextFileTest {
     }
 
     @Test
-    public void checkTest(){
-        Assert.assertTrue(file.check(filePath,"Привет"));
+    public void changeTest() throws IOException {
+        Assert.assertTrue(file.change(filePath,"Diсtionary/Словарь"));
     }
 
 }

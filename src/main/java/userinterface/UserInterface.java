@@ -17,9 +17,6 @@ public class UserInterface implements ActionListener{
     public void createUserInterface(){
         JFrame frame = createFrame();
         frame.getContentPane().add(BorderLayout.NORTH,createMenuBar(frame));
-        //frame.getContentPane().add(BorderLayout.CENTER,getAddPanel());
-      //  frame.getContentPane().add(BorderLayout.CENTER,getTranslatePanel());
-      // frame.getContentPane().add(BorderLayout.CENTER,getDeletePanel());
         frame.setVisible(true);
     }
 
@@ -60,7 +57,8 @@ public class UserInterface implements ActionListener{
         change.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                frame.getContentPane().add(BorderLayout.CENTER, getChangePanel());
+                frame.setVisible(true);
             }
         });
         word.add(add);
@@ -195,7 +193,6 @@ public class UserInterface implements ActionListener{
         textFieldForRemove.setPreferredSize(new Dimension(150,24));
         panel.add(textFieldForRemove,constraints);
 
-
         constraints.gridx = 0;
         constraints.gridy = 1;
         final JButton delete = new JButton("Delete");
@@ -218,4 +215,57 @@ public class UserInterface implements ActionListener{
 
         return panel;
     }
+
+    private JPanel getChangePanel(){
+        JPanel panel = new JPanel(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.WEST;
+        constraints.insets = new Insets(10,10,10,10);
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        JLabel language1 = new JLabel("Write word on language 1");
+        panel.add(language1,constraints);
+
+        constraints.gridx = 1;
+        final JTextField textFieldForLanguage1 = new JTextField();
+        textFieldForLanguage1.setPreferredSize(new Dimension(150,24));
+        panel.add(textFieldForLanguage1,constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        JLabel language2 = new JLabel("Write word on language 2");
+        panel.add(language2,constraints);
+
+        constraints.gridx = 1;
+        final JTextField textFieldForLanguage2 = new JTextField();
+        textFieldForLanguage2.setPreferredSize(new Dimension(150,24));
+        panel.add(textFieldForLanguage2,constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        final JButton addNewWord = new JButton("Edit word");
+        addNewWord.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    dictionary.changeWordAtDictionary(new Word(textFieldForLanguage1.getText(),
+                            textFieldForLanguage2.getText()));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                addNewWord.setText("Word changed!");
+            }
+        });
+        panel.add(addNewWord,constraints);
+
+        constraints.gridx = 1;
+        JButton cancel = new JButton("Cancel");
+        panel.add(cancel,constraints);
+
+        return panel;
+
+    }
+
 }

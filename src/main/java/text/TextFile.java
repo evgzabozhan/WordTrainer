@@ -51,4 +51,23 @@ public class TextFile implements TextMethod {
         }
     }
 
+    @Override
+    public boolean change(String filePath,String wordString) throws IOException {
+        String[] word = wordString.split("/");
+        String[] data = read(filePath).split("\n");
+
+        List<String> dictionary = new ArrayList<>();
+
+        for(String wordData : data){
+            if(wordData.contains(word[0]) || wordData.contains(word[1])) {
+                String[] wordInDictionary = wordData.split("/");
+                if(!wordInDictionary[0].equals(word[0]) || !wordInDictionary[1].equals(word[1])){
+                    dictionary.add(wordString + "\n");
+                }
+            } else {
+                dictionary.add(wordData + "\n");
+            }
+        }
+        return write(filePath,dictionary);
+    }
 }

@@ -10,4 +10,5 @@ public interface DictionaryMethod {
      boolean writeWordToDictionary(Word word);
      boolean removeWordFromDictionary( Word word) throws IOException;
      boolean checkWordFromDictionary(Word word) throws IOException;
+     boolean changeWordAtDictionary(Word word) throws IOException;
 }

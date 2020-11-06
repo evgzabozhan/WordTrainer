@@ -13,6 +13,7 @@ public class DictionaryTest {
     Dictionary dictionary = new Dictionary();
 
 
+
     @Test
     public void loadDictionaryTest() throws IOException {
         Dictionary.setPath("src/main/resources/TestDictionary.txt");
@@ -45,6 +46,14 @@ public class DictionaryTest {
         Dictionary.setPath("src/main/resources/TestDictionary.txt");
 
         Assert.assertTrue(dictionary.checkWordFromDictionary(new Word("Cat","Кошка")));
+    }
+
+    @Test
+    public void changeWordAtDictionaryTest() throws IOException {
+        Dictionary.setPath("src/main/resources/TestDictionary.txt");
+
+        Assert.assertTrue(dictionary.changeWordAtDictionary(new Word("Home","Дом")));
+
     }
 
 }
