@@ -6,3 +6,4 @@ Java/Кофе
 Second/Второй
 Bird/Птица
 Angle/Угол
+Mother/Мама

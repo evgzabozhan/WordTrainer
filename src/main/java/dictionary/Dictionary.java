@@ -27,8 +27,11 @@ public class Dictionary implements DictionaryMethod {
     }
 
     public boolean writeWordToDictionary(Word word) {
-        String wordString = word.getLanguage1() + "/" + word.getLanguage2();
-        return file.add(path,wordString);
+        if(!word.getLanguage1().equals("") && !word.getLanguage2().equals("")) {
+            String wordString = word.getLanguage1() + "/" + word.getLanguage2();
+            return file.add(path,wordString);
+        }
+        return false;
     }
 
     public boolean removeWordFromDictionary( Word word) throws IOException {

@@ -12,8 +12,6 @@ import java.io.IOException;
 public class UserInterface implements ActionListener{
     Dictionary dictionary = new Dictionary();
 
-
-
     public void createUserInterface(){
         JFrame frame = createFrame();
         frame.getContentPane().add(BorderLayout.NORTH,createMenuBar(frame));
@@ -61,9 +59,20 @@ public class UserInterface implements ActionListener{
                 frame.setVisible(true);
             }
         });
+
+        JMenuItem translate = new JMenuItem("Translate word");
+        change.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().add(BorderLayout.CENTER, getTranslatePanel());
+                frame.setVisible(true);
+            }
+        });
+
         word.add(add);
         word.add(delete);
         word.add(change);
+        word.add(translate);
 
         JMenu help = new JMenu("Help");
         help.add(new JMenuItem("About"));
