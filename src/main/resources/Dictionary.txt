@@ -1,9 +1,5 @@
-Word/Слово
-Good/Хорошо
-Implement/Реализовывать
-Diсtionary/Словарь
-Java/Кофе
-Second/Второй
+Hello/Привет
+Goodbye/До встречи
+Dog/Собака
+Cat/Кошка
 Bird/Птица
-Angle/Угол
-Mother/Мама

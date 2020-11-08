@@ -9,8 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class UserInterface implements ActionListener{
+public class UserInterface {
     Dictionary dictionary = new Dictionary();
+    JFrame frame = new JFrame("Word trainer");
 
     public void createUserInterface(){
         JFrame frame = createFrame();
@@ -18,13 +19,7 @@ public class UserInterface implements ActionListener{
         frame.setVisible(true);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
     private JFrame createFrame(){
-        JFrame frame = new JFrame("Word trainer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,500);
         return frame;
@@ -61,10 +56,14 @@ public class UserInterface implements ActionListener{
         });
 
         JMenuItem translate = new JMenuItem("Translate word");
-        change.addActionListener(new ActionListener() {
+        translate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.getContentPane().add(BorderLayout.CENTER, getTranslatePanel());
+                try {
+                    frame.getContentPane().add(BorderLayout.CENTER, getTranslatePanel());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
                 frame.setVisible(true);
             }
         });
@@ -132,7 +131,10 @@ public class UserInterface implements ActionListener{
 
     }
 
-    private JPanel getTranslatePanel(){
+    private JPanel getTranslatePanel() throws IOException {
+
+        int length = (int) (Math.random() * dictionary.loadDictionary().size());
+
         JPanel panel = new JPanel(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -145,7 +147,7 @@ public class UserInterface implements ActionListener{
         panel.add(language1,constraints);
 
         constraints.gridx = 1;
-        final JLabel wordText = new JLabel("Hello");
+        final JLabel wordText = new JLabel(dictionary.loadDictionary().get(length).getLanguage1());
         panel.add(wordText,constraints);
 
         constraints.gridx = 0;
@@ -167,6 +169,7 @@ public class UserInterface implements ActionListener{
                 try {
                    if(dictionary.checkWordFromDictionary(new Word(wordText.getText(),textFieldForLanguage2.getText()))){
                        check.setText("You are right!");
+                       frame.getContentPane().add(BorderLayout.CENTER, getTranslatePanel());
                    } else {
                        check.setText("It's wrong!");
                    }
