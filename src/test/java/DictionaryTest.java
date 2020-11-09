@@ -12,12 +12,14 @@ import java.util.List;
 public class DictionaryTest {
     Dictionary dictionary = new Dictionary();
 
+    static {
+        Dictionary.setPath("src/main/resources/TestDictionary.txt");
+    }
+
 
 
     @Test
     public void loadDictionaryTest() throws IOException {
-        Dictionary.setPath("src/main/resources/TestDictionary.txt");
-
         List<Word> testList = new ArrayList<>();
         testList.add(new Word("Dog", "Собака"));
         testList.add(new Word("Cat", "Кошка"));
@@ -31,27 +33,21 @@ public class DictionaryTest {
 
     @Test
     public void writeWordToDictionaryTest(){
-        Dictionary.setPath("src/main/resources/TestDictionary.txt");
         assertTrue(dictionary.writeWordToDictionary(new Word("Time","Время")));
     }
 
     @Test
     public void removeWordFromDictionaryTest() throws IOException {
-        Dictionary.setPath("src/main/resources/TestDictionary.txt");
         assertTrue(dictionary.removeWordFromDictionary(new Word("Time","Время")));
     }
 
     @Test
     public void checkWordFromDictionaryTest() throws IOException {
-        Dictionary.setPath("src/main/resources/TestDictionary.txt");
-
         Assert.assertTrue(dictionary.checkWordFromDictionary(new Word("Cat","Кошка")));
     }
 
     @Test
     public void changeWordAtDictionaryTest() throws IOException {
-        Dictionary.setPath("src/main/resources/TestDictionary.txt");
-
         Assert.assertTrue(dictionary.changeWordAtDictionary(new Word("Home","Дом")));
 
     }
