@@ -16,8 +16,6 @@ public class DictionaryTest {
         Dictionary.setPath("src/main/resources/TestDictionary.txt");
     }
 
-
-
     @Test
     public void loadDictionaryTest() throws IOException {
         List<Word> testList = new ArrayList<>();

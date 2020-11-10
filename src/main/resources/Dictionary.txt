@@ -1,5 +1,4 @@
 Hello/Привет
-Goodbye/До встречи
 Dog/Собака
 Cat/Кошка
 Bird/Птица

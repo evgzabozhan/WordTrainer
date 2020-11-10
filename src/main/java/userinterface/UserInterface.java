@@ -13,9 +13,10 @@ public class UserInterface {
     Dictionary dictionary = new Dictionary();
     JFrame frame = new JFrame("Word trainer");
 
-    public void createUserInterface(){
+    public void createUserInterface() throws IOException {
         JFrame frame = createFrame();
         frame.getContentPane().add(BorderLayout.NORTH,createMenuBar(frame));
+       frame.getContentPane().add(BorderLayout.CENTER,getTranslatePanel());
         frame.setVisible(true);
     }
 
@@ -33,6 +34,7 @@ public class UserInterface {
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().remove(1);
                frame.getContentPane().add(BorderLayout.CENTER, getAddPanel());
                frame.setVisible(true);
             }
@@ -41,6 +43,7 @@ public class UserInterface {
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().remove(1);
                 frame.getContentPane().add(BorderLayout.CENTER, getDeletePanel());
                 frame.setVisible(true);
             }
@@ -50,6 +53,7 @@ public class UserInterface {
         change.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().remove(1);
                 frame.getContentPane().add(BorderLayout.CENTER, getChangePanel());
                 frame.setVisible(true);
             }
@@ -60,6 +64,7 @@ public class UserInterface {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    frame.getContentPane().remove(1);
                     frame.getContentPane().add(BorderLayout.CENTER, getTranslatePanel());
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
@@ -169,6 +174,7 @@ public class UserInterface {
                 try {
                    if(dictionary.checkWordFromDictionary(new Word(wordText.getText(),textFieldForLanguage2.getText()))){
                        check.setText("You are right!");
+                       frame.getContentPane().remove(1);
                        frame.getContentPane().add(BorderLayout.CENTER, getTranslatePanel());
                    } else {
                        check.setText("It's wrong!");
