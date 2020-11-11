@@ -79,13 +79,48 @@ public class UserInterface {
         word.add(translate);
 
         JMenu help = new JMenu("Help");
-        help.add(new JMenuItem("About"));
+        JMenuItem about = new JMenuItem("About");
+        about.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().remove(1);
+                frame.getContentPane().add(BorderLayout.CENTER, getAboutPanel());
+                frame.setVisible(true);
+            }
+        });
+        help.add(about);
 
         menuBar.add(word);
         menuBar.add(help);
 
         return menuBar;
 
+    }
+
+    private JPanel getAboutPanel(){
+        JPanel panel = new JPanel(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.WEST;
+        constraints.insets = new Insets(10,10,10,10);
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+
+        JLabel about = new JLabel("it's Word Trainer.");
+        panel.add(about,constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        JLabel about1 = new JLabel("This program can help you with learning words on another language.");
+        panel.add(about1,constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        JLabel about2 = new JLabel("Created by evgzabozhan");
+        panel.add(about2,constraints);
+
+        return panel;
     }
 
     private JPanel getAddPanel(){
