@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class UserInterface {
+    public static int rightWords = 0;
+
     Dictionary dictionary = new Dictionary();
     JFrame frame = new JFrame("Word trainer");
 
@@ -159,6 +161,8 @@ public class UserInterface {
                     dictionary.writeWordToDictionary(new Word(textFieldForLanguage1.getText(),
                             textFieldForLanguage2.getText()));
                     addNewWord.setText("Word added!");
+                    textFieldForLanguage1.setText("");
+                    textFieldForLanguage2.setText("");
             }
         });
         panel.add(addNewWord,constraints);
@@ -201,6 +205,11 @@ public class UserInterface {
         panel.add(textFieldForLanguage2,constraints);
 
         constraints.gridx = 0;
+        constraints.gridy = 3;
+        final JLabel score = new JLabel("Score : " + rightWords);
+        panel.add(score,constraints);
+
+        constraints.gridx = 0;
         constraints.gridy = 2;
         final JButton check = new JButton("Check");
         check.addActionListener(new ActionListener() {
@@ -211,8 +220,13 @@ public class UserInterface {
                        check.setText("You are right!");
                        frame.getContentPane().remove(1);
                        frame.getContentPane().add(BorderLayout.CENTER, getTranslatePanel());
+                       rightWords++;
                    } else {
                        check.setText("It's wrong!");
+                       frame.getContentPane().remove(1);
+                       frame.getContentPane().add(BorderLayout.CENTER, getTranslatePanel());
+                       wordText.setText(wordText.getText());
+                       rightWords--;
                    }
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
@@ -225,6 +239,10 @@ public class UserInterface {
         constraints.gridx = 1;
         JButton cancel = new JButton("Cancel");
         panel.add(cancel,constraints);
+
+
+
+
 
         return panel;
     }

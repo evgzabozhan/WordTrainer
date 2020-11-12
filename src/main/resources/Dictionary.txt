@@ -2,3 +2,6 @@ Hello/Привет
 Dog/Собака
 Cat/Кошка
 Bird/Птица
+Down/Вниз
+Do/Делать
+Beaver/Бобер
