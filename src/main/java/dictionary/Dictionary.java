@@ -10,6 +10,10 @@ import java.util.List;
 public class Dictionary implements DictionaryMethod {
     private static String path = "src/main/resources/Dictionary.txt";
 
+    public static String getPath() {
+        return path;
+    }
+
     public static void setPath(String path) {
         Dictionary.path = path;
     }
@@ -48,8 +52,8 @@ public class Dictionary implements DictionaryMethod {
     public boolean checkWordFromDictionary(Word word) throws IOException {
         List<Word> dictionary = loadDictionary();
         for(Word wordFromDictionary : dictionary){
-            if (wordFromDictionary.getLanguage1().equals(word.getLanguage1())
-                    && wordFromDictionary.getLanguage2().equals(word.getLanguage2())){
+            if (wordFromDictionary.getLanguage1().toLowerCase().equals(word.getLanguage1().toLowerCase())
+                    && wordFromDictionary.getLanguage2().toLowerCase().equals(word.getLanguage2().toLowerCase())){
                 return true;
             }
         }

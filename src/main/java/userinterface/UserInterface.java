@@ -18,7 +18,7 @@ public class UserInterface {
     public void createUserInterface() throws IOException {
         JFrame frame = createFrame();
         frame.getContentPane().add(BorderLayout.NORTH,createMenuBar(frame));
-       frame.getContentPane().add(BorderLayout.CENTER,getTranslatePanel());
+       frame.getContentPane().add(BorderLayout.CENTER,getPathPanel());
         frame.setVisible(true);
     }
 
@@ -92,8 +92,22 @@ public class UserInterface {
         });
         help.add(about);
 
+        JMenu settings = new JMenu("Settings");
+        JMenuItem dictionaryPath = new JMenuItem("Dictionary path");
+        dictionaryPath.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().remove(1);
+                frame.getContentPane().add(BorderLayout.CENTER, getPathPanel());
+                frame.setVisible(true);
+            }
+        });
+
+        settings.add(dictionaryPath);
+
         menuBar.add(word);
         menuBar.add(help);
+        menuBar.add(settings);
 
         return menuBar;
 
@@ -121,6 +135,63 @@ public class UserInterface {
         constraints.gridy = 2;
         JLabel about2 = new JLabel("Created by evgzabozhan");
         panel.add(about2,constraints);
+
+        return panel;
+    }
+
+    private JPanel getPathPanel(){
+        JPanel panel = new JPanel(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.WEST;
+        constraints.insets = new Insets(10,10,10,10);
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        JLabel language1 = new JLabel("Your dictionary path : ");
+        panel.add(language1,constraints);
+
+        constraints.gridx = 1;
+        final JLabel dictionaryPath = new JLabel(Dictionary.getPath());
+        panel.add(dictionaryPath,constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        JLabel setDictionaryPath = new JLabel("Set path to dictionary : ");
+        panel.add(setDictionaryPath,constraints);
+
+        constraints.gridx = 1;
+        final JTextField setPathField = new JTextField();
+        setPathField.setPreferredSize(new Dimension(150,24));
+        panel.add(setPathField,constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        final JButton check = new JButton("Set path");
+        check.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               Dictionary.setPath(setPathField.getText());
+               frame.getContentPane().remove(1);
+               frame.getContentPane().add(BorderLayout.CENTER,getPathPanel());
+            }
+        });
+        panel.add(check,constraints);
+
+        constraints.gridx = 1;
+        JButton cancel = new JButton("Cancel");
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().remove(1);
+                frame.getContentPane().add(BorderLayout.CENTER,getPathPanel());
+            }
+        });
+        panel.add(cancel,constraints);
+
+
+
+
 
         return panel;
     }
@@ -169,6 +240,13 @@ public class UserInterface {
 
         constraints.gridx = 1;
         JButton cancel = new JButton("Cancel");
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().remove(1);
+                frame.getContentPane().add(BorderLayout.CENTER,getAddPanel());
+            }
+        });
         panel.add(cancel,constraints);
 
         return panel;
@@ -218,15 +296,17 @@ public class UserInterface {
                 try {
                    if(dictionary.checkWordFromDictionary(new Word(wordText.getText(),textFieldForLanguage2.getText()))){
                        check.setText("You are right!");
+                       rightWords++;
                        frame.getContentPane().remove(1);
                        frame.getContentPane().add(BorderLayout.CENTER, getTranslatePanel());
-                       rightWords++;
+
                    } else {
                        check.setText("It's wrong!");
+                       rightWords--;
                        frame.getContentPane().remove(1);
                        frame.getContentPane().add(BorderLayout.CENTER, getTranslatePanel());
                        wordText.setText(wordText.getText());
-                       rightWords--;
+
                    }
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
@@ -238,11 +318,18 @@ public class UserInterface {
 
         constraints.gridx = 1;
         JButton cancel = new JButton("Cancel");
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().remove(1);
+                try {
+                    frame.getContentPane().add(BorderLayout.CENTER,getTranslatePanel());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
         panel.add(cancel,constraints);
-
-
-
-
 
         return panel;
     }
@@ -282,6 +369,13 @@ public class UserInterface {
 
         constraints.gridx = 1;
         JButton cancel = new JButton("Cancel");
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().remove(1);
+                frame.getContentPane().add(BorderLayout.CENTER,getDeletePanel());
+            }
+        });
         panel.add(cancel,constraints);
 
         return panel;
@@ -333,6 +427,13 @@ public class UserInterface {
 
         constraints.gridx = 1;
         JButton cancel = new JButton("Cancel");
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().remove(1);
+                frame.getContentPane().add(BorderLayout.CENTER,getChangePanel());
+            }
+        });
         panel.add(cancel,constraints);
 
         return panel;
