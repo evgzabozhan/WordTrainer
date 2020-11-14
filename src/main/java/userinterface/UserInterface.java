@@ -8,9 +8,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserInterface {
     public static int rightWords = 0;
+    private static List<Integer> numbersList = new ArrayList<>();
 
     Dictionary dictionary = new Dictionary();
     JFrame frame = new JFrame("Word trainer");
@@ -255,7 +258,8 @@ public class UserInterface {
 
     private JPanel getTranslatePanel() throws IOException {
 
-        int length = (int) (Math.random() * dictionary.loadDictionary().size());
+        int dictionarySize = dictionary.loadDictionary().size();
+        int length = (int) (Math.random() * dictionarySize);
 
         JPanel panel = new JPanel(new GridBagLayout());
 
@@ -269,7 +273,21 @@ public class UserInterface {
         panel.add(language1,constraints);
 
         constraints.gridx = 1;
-        final JLabel wordText = new JLabel(dictionary.loadDictionary().get(length).getLanguage1());
+        final JLabel wordText;
+        if(!numbersList.contains(length)) {
+            wordText = new JLabel(dictionary.loadDictionary().get(length).getLanguage1());
+            numbersList.add(length);
+        } else {
+            while (numbersList.contains(length) && numbersList.size() != dictionarySize){
+                length = (int) (Math.random() * dictionarySize);
+            }
+            if (numbersList.size() == dictionarySize){
+                numbersList = new ArrayList<>();
+            }
+            wordText = new JLabel(dictionary.loadDictionary().get(length).getLanguage1());
+            numbersList.add(length);
+        }
+
         panel.add(wordText,constraints);
 
         constraints.gridx = 0;
